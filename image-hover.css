@@ -1,0 +1,22 @@
+/* Keep the portrait monochrome until hover, then reveal its original colour. */
+.portrait-frame .portrait,
+.about-image img {
+  transition: filter 420ms ease;
+}
+
+.portrait-frame .portrait {
+  filter: grayscale(100%) contrast(1.08) brightness(0.96);
+}
+
+.portrait-frame:hover .portrait,
+.portrait-frame:focus-within .portrait,
+.about-image:hover img {
+  filter: grayscale(0%) contrast(1.02) brightness(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portrait-frame .portrait,
+  .about-image img {
+    transition: none;
+  }
+}
