@@ -1,0 +1,20 @@
+/* Beat enquiry form; paid files are intentionally not exposed on the public site. */
+.beat-store-content { min-width: 0; }
+.beat-rate { margin: 22px 0 0; color: var(--accent); font-family: "Space Grotesk", Arial, sans-serif; font-size: 1.15rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.beat-empty { margin: 0; padding: 28px; border: 1px solid var(--line); color: var(--muted); font-size: 0.92rem; }
+.beat-empty[hidden] { display: none; }
+.beat-request-form { grid-column: 1 / -1; width: 100%; max-width: 900px; padding: clamp(22px, 3vw, 32px); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.beat-request-form h3 { margin: 0 0 24px; font-family: "Space Grotesk", Arial, sans-serif; font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1; letter-spacing: -0.07em; text-transform: uppercase; }
+.beat-request-form label { display: block; color: var(--muted); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.beat-request-form input, .beat-request-form select, .beat-request-form textarea { display: block; width: 100%; min-height: 50px; margin-top: 9px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 0; background: transparent; color: var(--text); font: inherit; }
+.beat-request-form textarea { min-height: 110px; resize: vertical; }
+.beat-form-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 18px; }
+.beat-request-form > label { margin-bottom: 18px; }
+.beat-card audio { display: block; width: 100%; margin: 14px 0; }
+.beat-no-preview { color: var(--muted); font-size: 0.8rem; }
+.beat-card .buy-button { width: 100%; margin-top: 12px; transition: background 0.2s ease, transform 0.2s ease; }
+.beat-card .buy-button:hover, .beat-card .buy-button:focus-visible { transform: translateY(-1px); }
+.beat-request-form .form-bottom { align-items: flex-start; }
+.beat-request-form .form-bottom p { max-width: 480px; }
+@media (max-width: 760px) { .beat-form-row { grid-template-columns: 1fr; } .beat-request-form .form-bottom { flex-direction: column; } }
+@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } html { scroll-behavior: auto; } }

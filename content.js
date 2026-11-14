@@ -17,46 +17,7 @@ window.CREZI_CONTENT = {
       cover: ''
     }
   ],
-  beats: [
-    {
-      title: 'Beat 01',
-      genre: 'Afro-R&B',
-      price: '€25',
-      tags: ['dark', 'melodic', 'late-night'],
-      preview: '',
-      checkoutUrl: '',
-      downloadUrl: '',
-      formatChoices: ['MP3', 'WAV']
-    },
-    {
-      title: 'Beat 02',
-      genre: 'Trap / melodic',
-      price: '€25',
-      tags: ['driving', 'clean', 'hooky'],
-      preview: '',
-      checkoutUrl: '',
-      downloadUrl: '',
-      formatChoices: ['MP3', 'WAV']
-    },
-    {
-      title: 'Beat 03',
-      genre: 'Dark pop',
-      price: '€25',
-      tags: ['cinematic', 'intense', 'vocal'],
-      preview: '',
-      checkoutUrl: '',
-      downloadUrl: '',
-      formatChoices: ['MP3', 'WAV']
-    },
-    {
-      title: 'Beat 04',
-      genre: 'Alternative',
-      price: '€25',
-      tags: ['lo-fi', 'emotion', 'slow'],
-      preview: '',
-      checkoutUrl: '',
-      downloadUrl: '',
-      formatChoices: ['MP3', 'WAV']
-    }
-  ]
+  // Add real beats here after you have previews. Never put paid full-quality files in this public repository.
+  // Example: { title: 'My beat title', genre: 'R&B', tags: ['moody', 'slow'], price: '€25', preview: 'assets/previews/preview.mp3' }
+  beats: []
 };
