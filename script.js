@@ -52,34 +52,16 @@ function renderMusic() {
   });
 }
 
-function renderBeats() {
-  const grid = $('#beatGrid');
-  const empty = $('#beatEmpty');
-  const select = $('#requestedBeat');
-  if (!grid || !select) return;
-  grid.replaceChildren();
-  select.replaceChildren(new Option('Custom beat enquiry', 'Custom beat enquiry'));
-  const beats = content.beats || [];
-  if (empty) empty.hidden = beats.length > 0;
-
-  beats.forEach((beat, index) => {
-    const title = beat.title || `Beat ${String(index + 1).padStart(2, '0')}`;
-    const label = `Beat ${String(index + 1).padStart(2, '0')} — ${title}`;
-    select.add(new Option(label, label));
-    const card = document.createElement('article');
-    card.className = 'beat-card';
-    const tags = (beat.tags || (beat.genre ? [beat.genre] : [])).map((tag) => `<span>${escapeHTML(tag)}</span>`).join('');
-    const preview = beat.preview
-      ? `<audio controls preload="none" src="${escapeHTML(beat.preview)}" aria-label="Preview ${escapeHTML(title)}"></audio>`
-      : '<p class="beat-no-preview">Preview coming soon</p>';
-    card.innerHTML = `<div class="beat-top"><span class="beat-index">${escapeHTML(label)}</span><span class="beat-price">${escapeHTML(beat.price || '€25')}</span></div><h3>${escapeHTML(title)}</h3><div class="beat-tags">${tags}</div>${preview}<button class="buy-button" type="button">Request this beat — €25</button>`;
-    card.querySelector('.buy-button').addEventListener('click', () => {
-      select.value = label;
-      $('#beatRequestForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
-      select.focus({ preventScroll: true });
-    });
-    grid.appendChild(card);
-  });
+function syncBeatFields() {
+  const typeSelect = document.getElementById('contactType');
+  const beatFields = document.getElementById('beatFields');
+  const beatName = document.getElementById('beatName');
+  const beatFormat = document.getElementById('beatFormat');
+  if (!typeSelect || !beatFields || !beatName || !beatFormat) return;
+  const show = typeSelect.value === 'Beats';
+  beatFields.hidden = !show;
+  beatName.required = show;
+  beatFormat.required = show;
 }
 
 function openEmailDraft(form, subject, status) {
@@ -115,15 +97,15 @@ if (menuToggle && mobileMenu) {
 }
 
 $('#year').textContent = new Date().getFullYear();
-$('#beatRequestForm')?.addEventListener('submit', (event) => {
-  event.preventDefault();
-  openEmailDraft(event.currentTarget, `Beat request — ${$('#requestedBeat').value}`, $('#beatFormStatus'));
-});
+const contactType = document.getElementById('contactType');
+contactType?.addEventListener('change', syncBeatFields);
+syncBeatFields();
+
 $('#contactForm')?.addEventListener('submit', (event) => {
   event.preventDefault();
   const form = event.currentTarget;
-  openEmailDraft(form, form.elements.subject.value || 'CREZI website enquiry', $('#formStatus'));
+  const subject = form.elements.subject.value || 'CREZI website enquiry';
+  openEmailDraft(form, subject, $('#formStatus'));
 });
 
 renderMusic();
-renderBeats();
