@@ -1,0 +1,69 @@
+/* Targeted fixes for the ticker, About photo framing and responsive controls. */
+.marquee-wrap {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-block: 1px solid var(--line);
+}
+.marquee-track {
+  display: flex !important;
+  width: max-content !important;
+  max-width: none !important;
+  will-change: transform;
+  animation: crezi-ticker-slide 28s linear infinite !important;
+}
+.marquee-track span {
+  display: block;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+@keyframes crezi-ticker-slide {
+  from { transform: translate3d(0,0,0); }
+  to { transform: translate3d(-50%,0,0); }
+}
+.marquee-wrap:hover .marquee-track { animation-play-state: paused !important; }
+
+/* Show the entire original About photo regardless of its aspect ratio. */
+.carousel-viewport {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  overflow: visible !important;
+  background: var(--bg-strong);
+}
+.carousel-photo {
+  display: block;
+  width: 100%;
+  height: auto !important;
+  max-height: 78svh;
+  aspect-ratio: auto !important;
+  object-fit: contain !important;
+  object-position: center;
+}
+
+/* Keep visible controls usable and prevent header/form collisions on narrow screens. */
+button, select, a, input, textarea { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+@media (max-width: 700px) {
+  .site-header { grid-template-columns: auto minmax(0,1fr); gap: 10px; }
+  .header-actions { gap: 6px; }
+  .language-wrap select { max-width: 124px; }
+  .music-grid { grid-template-columns: minmax(0,1fr) !important; }
+  .about-section { grid-template-columns: minmax(0,1fr) !important; }
+  .carousel-photo { max-height: 70svh; }
+}
+@media (max-width: 360px) {
+  .site-header { padding-inline: 10px; }
+  .section-shell { width: calc(100% - 28px); }
+  .wordmark { font-size: 1.4rem; }
+  .language-wrap select { max-width: 106px; padding-inline: 5px; }
+  .header-actions { gap: 4px; }
+  .icon-button { width: 34px; height: 34px; }
+}
+/* The ticker is intentionally kept moving; the requested motion is part of the design. */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation-duration: 28s !important; animation-iteration-count: infinite !important; }
+}
