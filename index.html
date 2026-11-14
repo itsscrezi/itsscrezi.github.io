@@ -1,129 +1,35 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#101010">
-    <meta name="description" content="CREZI — Independent Albanian producer and artist.">
-    <title>CREZI — Producer & Artist</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23d61d1d'/%3E%3C/svg%3E" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="beat-store.css">
-    <link rel="stylesheet" href="image-hover.css">
-    <link rel="stylesheet" href="site-refresh.css">
-  </head>
-  <body>
-    <header class="site-header">
-      <a class="wordmark" href="#home" aria-label="CREZI home">CREZI<span>.</span></a>
-      <nav class="desktop-nav" aria-label="Main navigation">
-        <a href="#home" data-i18n="navHome">Home</a>
-        <a href="#discography" data-i18n="navMusic">Discography</a>
-        <a href="#about" data-i18n="navAbout">About</a>
-        <a href="#contact" data-i18n="navContact">Contact</a>
-      </nav>
-      <div class="header-actions">
-        <label class="language-picker">
-          <span class="visually-hidden" data-i18n="languageLabel">Choose language</span>
-          <select id="languageSelect" aria-label="Choose language">
-            <option value="en">🇬🇧 EN</option>
-            <option value="nl">🇳🇱 NL</option>
-            <option value="fr">🇫🇷 FR</option>
-            <option value="sq">🇦🇱 SQ</option>
-            <option value="de">🇩🇪 DE</option>
-          </select>
-        </label>
-        <button class="icon-button theme-toggle" id="themeToggle" type="button" aria-label="Switch to light theme" title="Switch theme"><span id="themeIcon" aria-hidden="true">☼</span></button>
-        <button class="icon-button menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false"><span aria-hidden="true">☰</span></button>
-      </div>
-    </header>
-
-    <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" hidden>
-      <a href="#home" data-i18n="navHome">Home</a>
-      <a href="#discography" data-i18n="navMusic">Discography</a>
-      <a href="#about" data-i18n="navAbout">About</a>
-      <a href="#contact" data-i18n="navContact">Contact</a>
-    </nav>
-
-    <main id="main">
-      <section class="hero section-shell" id="home">
-        <div class="hero-copy">
-          <h1>CREZI</h1>
-          <p class="hero-intro" data-i18n="tagline">Independent Albanian producer and artist.</p>
-          <a class="button button-dark" href="#discography" data-i18n="explore">Explore <span aria-hidden="true">↗</span></a>
-        </div>
-        <div class="hero-visual">
-          <figure class="portrait-frame">
-            <img src="https://raw.githubusercontent.com/itsscrezi/crezi.portfolio/main/crezi-portrait.png" alt="CREZI" class="portrait">
-          </figure>
-        </div>
-      </section>
-
-      <div class="marquee-wrap" aria-label="CREZI — music, beats and production">
-        <div class="marquee-track" aria-hidden="true">
-          <span data-i18n="ticker">CREZI&nbsp; / &nbsp;MUSIC&nbsp; / &nbsp;BEATS&nbsp; / &nbsp;PRODUCER&nbsp; / &nbsp;ARTIST&nbsp; / &nbsp;</span>
-          <span data-i18n="ticker">CREZI&nbsp; / &nbsp;MUSIC&nbsp; / &nbsp;BEATS&nbsp; / &nbsp;PRODUCER&nbsp; / &nbsp;ARTIST&nbsp; / &nbsp;</span>
-        </div>
-      </div>
-
-      <section class="section-shell section-block" id="discography">
-        <div class="section-heading"><h2 data-i18n="navMusic">Discography</h2></div>
-        <div class="music-grid" id="musicGrid"></div>
-      </section>
-
-      <section class="about-section section-shell section-block" id="about">
-        <h2 data-i18n="navAbout">About</h2>
-        <p data-i18n="tagline">Independent Albanian producer and artist.</p>
-      </section>
-
-      <section class="social-section" aria-label="Social links">
-        <div class="section-shell social-inner">
-          <span class="eyebrow" data-i18n="follow">Follow</span>
-          <div class="social-links">
-            <a href="https://www.instagram.com/itsscrezi/" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a>
-            <a href="https://www.tiktok.com/@itsscrezi" target="_blank" rel="noopener noreferrer">TikTok <span aria-hidden="true">↗</span></a>
-            <a href="https://www.youtube.com/@itsscrezi" target="_blank" rel="noopener noreferrer">YouTube <span aria-hidden="true">↗</span></a>
-            <a href="https://open.spotify.com/artist/3qm3DDhWwc61SOjXkeu8eL" target="_blank" rel="noopener noreferrer">Spotify <span aria-hidden="true">↗</span></a>
-          </div>
-        </div>
-      </section>
-
-      <section class="section-shell contact-section section-block" id="contact">
-        <div class="section-heading"><h2 data-i18n="navContact">Contact</h2></div>
-        <form class="contact-form" id="contactForm">
-          <div class="form-row">
-            <label><span data-i18n="name">Name</span><input name="name" required autocomplete="name" data-i18n-placeholder="namePlaceholder" placeholder="Your name"></label>
-            <label><span data-i18n="email">Email</span><input name="email" type="email" required autocomplete="email" placeholder="name@example.com"></label>
-          </div>
-          <div class="form-row">
-            <label><span data-i18n="topic">Topic</span>
-              <select id="contactType" name="type" required>
-                <option value="Question" data-i18n="question">Question</option>
-                <option value="Beat request" data-i18n="beatRequest">Beat request</option>
-                <option value="Collaboration" data-i18n="collaboration">Collaboration</option>
-                <option value="Business inquiry" data-i18n="inquiry">Business inquiry</option>
-                <option value="Other" data-i18n="other">Other</option>
-              </select>
-            </label>
-            <label><span data-i18n="subject">Subject</span><input name="subject" required data-i18n-placeholder="subjectPlaceholder" placeholder="Subject"></label>
-          </div>
-          <div class="form-row beat-detail-row" id="beatFields" hidden>
-            <label><span data-i18n="beatIdea">Beat name or idea</span><input id="beatName" name="beat_name" data-i18n-placeholder="beatIdeaPlaceholder" placeholder="Optional"></label>
-            <label><span data-i18n="format">Format</span>
-              <select id="beatFormat" name="beat_format"><option value="MP3">MP3</option><option value="WAV">WAV</option></select>
-            </label>
-          </div>
-          <label class="message-field"><span data-i18n="message">Message</span><textarea name="message" rows="5" required data-i18n-placeholder="messagePlaceholder" placeholder="Write your message"></textarea></label>
-          <div class="form-bottom">
-            <p id="formStatus" role="status" aria-live="polite" data-i18n="formNote">Opens your email app to send this message.</p>
-            <button class="button button-dark" type="submit" data-i18n="send">Send</button>
-          </div>
-        </form>
-        <a class="contact-email" href="mailto:itsscrezi@gmail.com">itsscrezi@gmail.com</a>
-      </section>
-    </main>
-
-    <footer class="site-footer"><div class="section-shell footer-inner"><span>© <span id="year"></span> CREZI</span><a href="#home" data-i18n="backTop">Back to top ↑</a></div></footer>
-    <script src="content.js"></script>
-    <script src="script.js"></script>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0b0b">
+  <meta name="description" content="CREZI — Independent Albanian music producer and artist.">
+  <title>CREZI — Independent Albanian producer and artist</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23df2929'/%3E%3C/svg%3E" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="site-refresh.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="#home" aria-label="CREZI home">CREZI<span>.</span></a>
+    <nav class="desktop-nav" aria-label="Main navigation"><a href="#home" data-i18n="home">Home</a><a href="#discography" data-i18n="discography">Discography</a><a href="#about" data-i18n="about">About</a><a href="#contact" data-i18n="contact">Contact</a></nav>
+    <div class="header-actions">
+      <label class="language-wrap"><span class="visually-hidden" data-i18n="chooseLanguage">Choose language</span><select id="languageSelect" aria-label="Choose language"><option value="en">🇬🇧 English</option><option value="nl">🇳🇱 Nederlands</option><option value="fr">🇫🇷 Français</option><option value="sq">🇦🇱 Shqip</option><option value="de">🇩🇪 Deutsch</option></select></label>
+      <button class="icon-button" id="themeToggle" type="button" aria-label="Switch to light mode"><span id="themeIcon" aria-hidden="true">☼</span></button>
+      <button class="icon-button menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false"><span aria-hidden="true">☰</span></button>
+    </div>
+  </header>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" hidden><a href="#home" data-i18n="home">Home</a><a href="#discography" data-i18n="discography">Discography</a><a href="#about" data-i18n="about">About</a><a href="#contact" data-i18n="contact">Contact</a></nav>
+  <main id="main">
+    <section class="hero section-shell" id="home"><div class="hero-copy"><h1>CREZI</h1><p data-i18n="tagline">Independent Albanian producer and artist.</p><a class="button" href="#discography"><span data-i18n="explore">Explore</span><span aria-hidden="true">↘</span></a></div><button class="hero-portrait image-colour-toggle" type="button" aria-label="Show portrait in colour" aria-pressed="false"><img src="https://raw.githubusercontent.com/itsscrezi/crezi.portfolio/main/crezi-portrait.png" alt="CREZI portrait"></button></section>
+    <div class="marquee-wrap" aria-label="Independent Albanian music producer and artist"><div class="marquee-track" aria-hidden="true"><span data-i18n="ticker">INDEPENDENT ALBANIAN MUSIC PRODUCER AND ARTIST&nbsp; / &nbsp;</span><span data-i18n="ticker">INDEPENDENT ALBANIAN MUSIC PRODUCER AND ARTIST&nbsp; / &nbsp;</span></div></div>
+    <section class="section-shell section-block" id="discography"><div class="section-heading"><h2 data-i18n="discography">Discography</h2></div><div class="music-grid" id="musicGrid"></div></section>
+    <section class="about-section section-shell section-block" id="about"><div class="about-heading"><h2 data-i18n="about">About</h2><p data-about-story></p></div><div class="photo-carousel" aria-label="CREZI photos"><div class="carousel-viewport" id="carouselViewport"></div><div class="carousel-controls"><button type="button" id="photoPrevious" aria-label="Previous photo">←</button><span id="photoCount" aria-live="polite">01 / 01</span><button type="button" id="photoNext" aria-label="Next photo">→</button></div></div></section>
+    <section class="social-section" aria-label="Social media"><div class="section-shell social-inner"><a href="https://www.instagram.com/itsscrezi/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle class="icon-fill" cx="18" cy="6" r="1"/></svg></a><a href="https://www.tiktok.com/@itsscrezi" target="_blank" rel="noopener noreferrer" aria-label="TikTok" title="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v11.2a4.2 4.2 0 1 1-3.6-4.15v3.2a1.2 1.2 0 1 0 .6 1.04V3h3c.2 2.3 1.45 3.65 3.7 4v3.1A8 8 0 0 1 14 8.5"/></svg></a><a href="https://www.youtube.com/@itsscrezi" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="4"/><path class="icon-fill" d="m10 9 5 3-5 3z"/></svg></a><a href="https://open.spotify.com/artist/3qm3DDhWwc61SOjXkeu8eL" target="_blank" rel="noopener noreferrer" aria-label="Spotify" title="Spotify"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="spotify-circle" cx="12" cy="12" r="10"/><path class="spotify-mark" d="M6.5 9c4.2-1.1 8.5-.6 11.5 1.2M7.2 12c3.4-.8 7-.35 9.7 1.15M8 15c2.8-.55 5.4-.2 7.7.95"/></svg></a></div></section>
+    <section class="section-shell contact-section section-block" id="contact"><div class="section-heading"><h2 data-i18n="contact">Contact</h2></div><form class="contact-form" id="contactForm"><div class="form-row"><label><span data-i18n="name">Name</span><input name="name" required autocomplete="name" placeholder="Name" data-i18n-placeholder="name"></label><label><span data-i18n="email">Email</span><input name="email" type="email" required autocomplete="email" placeholder="name@example.com"></label></div><div class="form-row"><label><span data-i18n="topic">Topic</span><select name="topic" required><option value="Question" data-i18n="question">Question</option><option value="Beat request" data-i18n="beatRequest">Beat request</option><option value="Collaboration" data-i18n="collaboration">Collaboration</option><option value="Business inquiry" data-i18n="business">Business inquiry</option><option value="Other" data-i18n="other">Other</option></select></label><span></span></div><label><span data-i18n="message">Message</span><textarea name="message" rows="5" required placeholder="Message" data-i18n-placeholder="message"></textarea></label><input type="hidden" name="_subject" value="CREZI website enquiry"><input type="hidden" name="_template" value="table"><div class="form-bottom"><p id="formStatus" role="status" aria-live="polite" data-i18n="formNote">Send your message directly to CREZI.</p><button class="button" type="submit" id="submitButton" data-i18n="send">Send</button></div></form><a class="contact-email" href="mailto:itsscrezi@gmail.com">itsscrezi@gmail.com</a></section>
+  </main>
+  <footer class="site-footer"><div class="section-shell footer-inner"><span>© <span id="year"></span> CREZI</span><a href="#home" data-i18n="backTop">Back to top ↑</a></div></footer>
+  <script src="content.js"></script><script src="script.js"></script>
+</body>
 </html>
