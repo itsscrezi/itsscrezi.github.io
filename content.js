@@ -1,4 +1,4 @@
-/* Edit this file to add your bio, photos, and release credits. */
+/* Edit this file to update the About bio, add photos, and manage music credits. */
 window.CREZI_CONTENT = {
   tagline: 'Independent Albanian producer and artist.',
   aboutStoryTranslations: {
@@ -7,6 +7,13 @@ window.CREZI_CONTENT = {
     fr: 'Je suis CREZI, producteur et artiste albanais, et j’aime explorer différents sons et styles. J’ai commencé à produire jeune et j’ai appris à faire de la musique à ma façon. J’ai travaillé avec des artistes comme AyFlori et je suis toujours partant pour de nouvelles collaborations et idées. Je continue à développer mon univers et à faire de la musique dès que je le peux.',
     sq: 'Unë jam CREZI, producent dhe artist shqiptar, dhe më pëlqen të eksperimentoj me tinguj e stile të ndryshme. Fillova të bëja produksion muzikor që i ri, duke mësuar ta bëja muzikën në mënyrën time. Kam punuar me artistë si AyFlori dhe jam gjithmonë i hapur për bashkëpunime e ide të reja. Vazhdoj të zhvilloj tingullin tim dhe të bëj muzikë sa herë që mundem.',
     de: 'Ich bin CREZI, albanischer Produzent und Künstler, und experimentiere gern mit verschiedenen Sounds und Stilen. Schon früh habe ich angefangen zu produzieren und dabei meinen eigenen Weg gefunden, Musik zu machen. Ich habe mit Künstlern wie AyFlori gearbeitet und bin immer offen für neue Zusammenarbeit und Ideen. Ich entwickle meinen Sound weiter und mache Musik, wann immer ich kann.'
+  },
+  tickerTranslations: {
+    en: 'INDEPENDENT ALBANIAN MUSIC PRODUCER AND ARTIST',
+    nl: 'ONAFHANKELIJKE ALBANESE MUZIEKPRODUCENT EN ARTIEST',
+    fr: 'PRODUCTEUR ET ARTISTE ALBANAIS INDÉPENDANT',
+    sq: 'PRODUCENT DHE ARTIST I PAVARUR SHQIPTAR',
+    de: 'UNABHÄNGIGER ALBANISCHER PRODUZENT UND KÜNSTLER'
   },
   portrait: 'https://raw.githubusercontent.com/itsscrezi/crezi.portfolio/main/crezi-portrait.png',
   aboutPhotos: [
@@ -40,3 +47,25 @@ window.CREZI_CONTENT = {
   },
   formProvider: 'https://formsubmit.co/ajax/itsscrezi@gmail.com'
 };
+
+/* Keep the marquee text in sync with the selected language and make its loop seamless. */
+(() => {
+  const tickerWords = window.CREZI_CONTENT.tickerTranslations;
+  function updateTicker() {
+    const track = document.querySelector('.marquee-track');
+    const wrap = document.querySelector('.marquee-wrap');
+    if (!track) return;
+    const language = document.documentElement.lang || 'en';
+    const text = tickerWords[language] || tickerWords.en;
+    const first = document.createElement('span');
+    first.textContent = text;
+    first.setAttribute('data-i18n', 'ticker');
+    const second = document.createElement('span');
+    second.textContent = text;
+    second.setAttribute('aria-hidden', 'true');
+    track.replaceChildren(first, second);
+    if (wrap) wrap.setAttribute('aria-label', text);
+  }
+  updateTicker();
+  new MutationObserver(updateTicker).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+})();
