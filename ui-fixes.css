@@ -1,69 +1,60 @@
-/* Targeted fixes for the ticker, About photo framing and responsive controls. */
-.marquee-wrap {
-  display: block;
-  width: 100%;
-  overflow: hidden;
-  border-block: 1px solid var(--line);
-}
-.marquee-track {
-  display: flex !important;
-  width: max-content !important;
-  max-width: none !important;
-  will-change: transform;
-  animation: crezi-ticker-slide 28s linear infinite !important;
-}
-.marquee-track span {
-  display: block;
-  flex: 0 0 auto;
-  white-space: nowrap;
-}
-@keyframes crezi-ticker-slide {
-  from { transform: translate3d(0,0,0); }
-  to { transform: translate3d(-50%,0,0); }
-}
+/* Typography, spacing and interaction corrections layered after the base layout. */
+.wordmark { letter-spacing: -0.035em !important; }
+.hero-copy h1 { letter-spacing: -0.065em !important; }
+.section-heading h2, .about-heading h2 { letter-spacing: -0.055em !important; }
+.music-card-info h3 { letter-spacing: -0.035em !important; }
+
+/* The carousel keeps the complete original photo visible, with no crop. */
+.carousel-viewport { display: grid; place-items: center; overflow: hidden; }
+.carousel-photo { width: 100%; height: auto !important; max-height: 78svh; aspect-ratio: auto !important; object-fit: contain !important; object-position: center; }
+
+/* Consistent contained controls and safe wrapping prevent overlaps. */
+.site-header { grid-template-columns: auto minmax(0,1fr) auto; }
+.desktop-nav { gap: clamp(14px,2vw,30px); }
+.desktop-nav a { white-space: nowrap; }
+.header-actions { gap: 8px; }
+.music-card-info { align-items: flex-start; flex-wrap: wrap; }
+.music-card-info > div:first-child { flex: 1 1 220px; }
+.music-links { flex: 0 1 auto; }
+.embed-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; margin: 0 0 16px; padding: 10px 14px; border: 1px solid var(--line); background: transparent; color: var(--text); cursor: pointer; transition: background .2s ease,border-color .2s ease,color .2s ease,transform .2s ease; }
+.embed-toggle:hover,.embed-toggle:focus-visible { transform: translateY(-1px); border-color: var(--accent); background: var(--accent); color: #fff; }
+.spotify-embed { display: block; width: 100%; max-width: 100%; height: 152px; margin: 0 0 16px; border: 0; border-radius: 12px; }
+.contact-form select,.language-wrap select { background-color: var(--bg); color: var(--text); }
+.contact-form select option,.language-wrap select option { background: var(--bg); color: var(--text); }
+
+/* Seamless ticker: four identical groups, move exactly half the track width. */
+.marquee-wrap { display: block; width: 100%; overflow: hidden; }
+.marquee-track { display: flex !important; width: max-content !important; max-width: none !important; will-change: transform; animation: crezi-slide 28s linear infinite !important; }
+.marquee-track span { display: block; flex: 0 0 auto; white-space: nowrap; }
+@keyframes crezi-slide { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
 .marquee-wrap:hover .marquee-track { animation-play-state: paused !important; }
 
-/* Show the entire original About photo regardless of its aspect ratio. */
-.carousel-viewport {
-  display: grid;
-  place-items: center;
-  width: 100%;
-  overflow: visible !important;
-  background: var(--bg-strong);
+@media (max-width: 900px) {
+  .site-header { grid-template-columns: auto minmax(0,1fr); gap: 12px; }
+  .desktop-nav { display: none; }
+  .menu-toggle { display: inline-grid; }
+  .mobile-menu:not([hidden]) { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; padding: 12px 20px; border-bottom: 1px solid var(--line); background: var(--bg); }
+  .mobile-menu a { padding: 10px 6px; text-align: center; }
+  .about-section { grid-template-columns: minmax(0,1fr); gap: 26px; }
+  .photo-carousel { width: 100%; justify-self: stretch; }
 }
-.carousel-photo {
-  display: block;
-  width: 100%;
-  height: auto !important;
-  max-height: 78svh;
-  aspect-ratio: auto !important;
-  object-fit: contain !important;
-  object-position: center;
-}
-
-/* Keep visible controls usable and prevent header/form collisions on narrow screens. */
-button, select, a, input, textarea { -webkit-tap-highlight-color: transparent; }
-button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-}
-@media (max-width: 700px) {
-  .site-header { grid-template-columns: auto minmax(0,1fr); gap: 10px; }
-  .header-actions { gap: 6px; }
-  .language-wrap select { max-width: 124px; }
-  .music-grid { grid-template-columns: minmax(0,1fr) !important; }
-  .about-section { grid-template-columns: minmax(0,1fr) !important; }
+@media (max-width: 620px) {
+  .section-shell { width: calc(100% - 40px); }
+  .site-header { height: 68px; padding-inline: 16px; gap: 8px; }
+  .wordmark { font-size: 1.6rem; }
+  .header-actions { gap: 5px; }
+  .language-wrap select { max-width: 120px; min-height: 38px; padding-inline: 6px; font-size: .64rem; }
+  .icon-button { width: 36px; height: 36px; }
+  .hero { grid-template-columns: 1fr; gap: 30px; padding: 56px 0 42px; }
+  .hero-copy h1 { font-size: clamp(4.5rem,19vw,7.5rem); }
+  .hero-portrait { width: min(100%,420px); justify-self: center; }
+  .music-grid { grid-template-columns: minmax(0,1fr); }
+  .music-card-info { flex-direction: row; }
   .carousel-photo { max-height: 70svh; }
+  .form-bottom { align-items: flex-start; flex-direction: column; }
+  .footer-inner { align-items: flex-start; flex-direction: column; }
 }
-@media (max-width: 360px) {
-  .site-header { padding-inline: 10px; }
-  .section-shell { width: calc(100% - 28px); }
-  .wordmark { font-size: 1.4rem; }
-  .language-wrap select { max-width: 106px; padding-inline: 5px; }
-  .header-actions { gap: 4px; }
-  .icon-button { width: 34px; height: 34px; }
-}
-/* The ticker is intentionally kept moving; the requested motion is part of the design. */
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track { animation-duration: 28s !important; animation-iteration-count: infinite !important; }
+  .hero-portrait { animation: none !important; }
+  .marquee-track { animation: crezi-slide 28s linear infinite !important; }
 }
