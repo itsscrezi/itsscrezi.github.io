@@ -1,7 +1,6 @@
-/* Edit this file to add your real bio and photos. The site keeps the full photo visible. */
+/* Edit this file to add your bio, photos, and release credits. */
 window.CREZI_CONTENT = {
   tagline: 'Independent Albanian producer and artist.',
-  // Replace these drafts with your real story. This wording stays accurate without making up personal details.
   aboutStoryTranslations: {
     en: 'CREZI is an independent Albanian producer and artist. Explore the music, production credits, and moments behind the work.',
     nl: 'CREZI is een onafhankelijke Albanese producer en artiest. Ontdek de muziek, producties en momenten achter het werk.',
@@ -10,15 +9,31 @@ window.CREZI_CONTENT = {
     de: 'CREZI ist ein unabhängiger albanischer Produzent und Künstler. Entdecke die Musik, Produktionen und Momente hinter der Arbeit.'
   },
   portrait: 'https://raw.githubusercontent.com/itsscrezi/crezi.portfolio/main/crezi-portrait.png',
-  // Add photos inside assets/photos/ and list their paths below, e.g. 'assets/photos/live-show.jpg'.
+  // Add image files in assets/photos/ and their paths here.
   aboutPhotos: [
     'https://raw.githubusercontent.com/itsscrezi/crezi.portfolio/main/crezi-portrait.png'
     // 'assets/photos/live-show.jpg',
     // 'assets/photos/studio.jpg'
   ],
   music: [
-    { title: 'A E DIN', role: 'Own release', descriptionKey: 'track1', artist: 'CREZI', spotify: 'https://open.spotify.com/track/72GipCAxudNTFmI6Xl0CUi', youtube: 'https://www.youtube.com/@itsscrezi', cover: '' },
-    { title: 'PIANO!', role: 'Production credit', descriptionKey: 'track2', artist: 'AyFlori', spotify: 'https://open.spotify.com/track/4PqTVcr15EeWhJThgXP8pj', cover: '' }
+    {
+      title: 'A E DIN',
+      artist: 'CREZI',
+      role: 'Own release',
+      descriptionKey: 'track1',
+      spotify: 'https://open.spotify.com/track/72GipCAxudNTFmI6Xl0CUi',
+      youtube: 'https://www.youtube.com/@itsscrezi',
+      cover: ''
+    },
+    {
+      title: 'PIANO!',
+      artist: 'AyFlori',
+      role: 'Production credit',
+      descriptionKey: 'track2',
+      spotify: 'https://open.spotify.com/track/4PqTVcr15EeWhJThgXP8pj',
+      youtube: '',
+      cover: ''
+    }
   ],
   socials: {
     instagram: 'https://www.instagram.com/itsscrezi/',
