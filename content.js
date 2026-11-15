@@ -1,4 +1,4 @@
-/* Edit this file to update the About bio, add photos, and manage music credits. */
+/* Edit this file to add your bio, photos, and release credits. */
 window.CREZI_CONTENT = {
   tagline: 'Independent Albanian producer and artist.',
   aboutStoryTranslations: {
@@ -9,15 +9,28 @@ window.CREZI_CONTENT = {
     de: 'Ich bin CREZI, albanischer Produzent und Künstler, und experimentiere gern mit verschiedenen Sounds und Stilen. Schon früh habe ich angefangen zu produzieren und dabei meinen eigenen Weg gefunden, Musik zu machen. Ich habe mit Künstlern wie AyFlori gearbeitet und bin immer offen für neue Zusammenarbeit und Ideen. Ich entwickle meinen Sound weiter und mache Musik, wann immer ich kann.'
   },
   portrait: 'https://raw.githubusercontent.com/itsscrezi/crezi.portfolio/main/crezi-portrait.png',
-  // Put About photos in assets/photos/ and add each relative path below.
   aboutPhotos: [
-    'https://raw.githubusercontent.com/itsscrezi/crezi.portfolio/main/crezi-portrait.png'
-    // 'assets/photos/live-show.jpg',
-    // 'assets/photos/studio.jpg'
+    'https://raw.githubusercontent.com/itsscrezi/crezi.portfolio/main/crezi-portrait.png',
+    'assets/photos/live-show.jpg',
+    'assets/photos/studio.jpg'
   ],
   music: [
-    { title: 'A E DIN', artist: 'CREZI', role: 'Own release', spotify: 'https://open.spotify.com/track/72GipCAxudNTFmI6Xl0CUi', youtube: 'https://www.youtube.com/@itsscrezi', cover: '' },
-    { title: 'PIANO!', artist: 'AyFlori', role: 'Production credit', spotify: 'https://open.spotify.com/track/4PqTVcr15EeWhJThgXP8pj', youtube: '', cover: '' }
+    {
+      title: 'A E DIN',
+      artist: 'CREZI',
+      role: 'Own release',
+      spotify: 'https://open.spotify.com/track/72GipCAxudNTFmI6Xl0CUi',
+      youtube: 'https://www.youtube.com/@itsscrezi',
+      cover: ''
+    },
+    {
+      title: 'PIANO!',
+      artist: 'AyFlori',
+      role: 'Production credit',
+      spotify: 'https://open.spotify.com/track/4PqTVcr15EeWhJThgXP8pj',
+      youtube: '',
+      cover: ''
+    }
   ],
   socials: {
     instagram: 'https://www.instagram.com/itsscrezi/',
