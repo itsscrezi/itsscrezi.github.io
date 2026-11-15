@@ -1,6 +1,5 @@
-const CACHE_NAME = 'crezi-site-v2';
+const CACHE_NAME = 'crezi-site-v3';
 const CORE_FILES = ['./', './index.html', './offline.html', './404.html', './styles.css', './site-refresh.css', './ui-fixes.css', './content.js', './script.js'];
-
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_FILES)).then(() => self.skipWaiting()));
 });
