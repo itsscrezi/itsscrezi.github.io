@@ -1,16 +1,44 @@
 const $ = (selector) => document.querySelector(selector);
 const content = window.CREZI_CONTENT || { music: [], aboutPhotos: [], aboutStoryTranslations: {} };
 const translations = {
-  en:{home:'Home',discography:'Discography',about:'About',contact:'Contact',mainNavigation:'Main navigation',tagline:'Independent Albanian producer and artist.',ticker:'INDEPENDENT ALBANIAN MUSIC PRODUCER AND ARTIST',chooseLanguage:'Choose language',portraitColour:'Show portrait in colour',portraitMono:'Show portrait in black and white',photoGallery:'CREZI photo gallery',previousPhoto:'Previous photo',nextPhoto:'Next photo',socialMedia:'Social media',instagram:'Instagram',tiktok:'TikTok',youtube:'YouTube',spotify:'Spotify',name:'Name',email:'Email',topic:'Topic',question:'Question',beatRequest:'Beat request',collaboration:'Collaboration',business:'Business inquiry',other:'Other',message:'Message',formNote:'Send your message directly to CREZI.',send:'Send',backTop:'Back to top ↑',listen:'Listen on Spotify',hide:'Hide player',own:'Own release',production:'Production credit',sending:'Sending…',sent:'Message sent successfully.',sendError:'Could not send right now. Please email directly.',track1:'Released by CREZI.',track2:'AyFlori · production by CREZI.',switchLight:'Switch to light mode',switchDark:'Switch to dark mode',openMenu:'Open menu',closeMenu:'Close menu'},
-  nl:{home:'Home',discography:'Discografie',about:'Over CREZI',contact:'Contact',mainNavigation:'Hoofdnavigatie',tagline:'Onafhankelijke Albanese producer en artiest.',ticker:'ONAFHANKELIJKE ALBANESE MUZIEKPRODUCENT EN ARTIEST',chooseLanguage:'Kies je taal',portraitColour:'Toon de foto in kleur',portraitMono:'Toon de foto in zwart-wit',photoGallery:'Fotogalerij van CREZI',previousPhoto:'Vorige foto',nextPhoto:'Volgende foto',socialMedia:'Sociale media',instagram:'Instagram',tiktok:'TikTok',youtube:'YouTube',spotify:'Spotify',name:'Naam',email:'E-mail',topic:'Onderwerp',question:'Vraag',beatRequest:'Beat aanvragen',collaboration:'Samenwerking',business:'Zakelijke aanvraag',other:'Anders',message:'Bericht',formNote:'Stuur je bericht rechtstreeks naar CREZI.',send:'Verzenden',backTop:'Terug naar boven ↑',listen:'Luister op Spotify',hide:'Speler verbergen',own:'Eigen release',production:'Productiecredit',sending:'Verzenden…',sent:'Bericht verzonden.',sendError:'Verzenden lukt nu niet. Mail rechtstreeks.',track1:'Uitgebracht door CREZI.',track2:'AyFlori · productie door CREZI.',switchLight:'Schakel naar licht thema',switchDark:'Schakel naar donker thema',openMenu:'Menu openen',closeMenu:'Menu sluiten'},
-  fr:{home:'Accueil',discography:'Discographie',about:'À propos',contact:'Contact',mainNavigation:'Navigation principale',tagline:'Producteur et artiste albanais indépendant.',ticker:'PRODUCTEUR ET ARTISTE ALBANAIS INDÉPENDANT',chooseLanguage:'Choisir la langue',portraitColour:'Afficher la photo en couleur',portraitMono:'Afficher la photo en noir et blanc',photoGallery:'Galerie photo de CREZI',previousPhoto:'Photo précédente',nextPhoto:'Photo suivante',socialMedia:'Réseaux sociaux',instagram:'Instagram',tiktok:'TikTok',youtube:'YouTube',spotify:'Spotify',name:'Nom',email:'E-mail',topic:'Sujet',question:'Question',beatRequest:'Demande de beat',collaboration:'Collaboration',business:'Demande professionnelle',other:'Autre',message:'Message',formNote:'Envoyez votre message directement à CREZI.',send:'Envoyer',backTop:'Retour en haut ↑',listen:'Écouter sur Spotify',hide:'Masquer le lecteur',own:'Sortie personnelle',production:'Crédit de production',sending:'Envoi…',sent:'Message envoyé.',sendError:'Envoi impossible pour le moment. Écrivez-nous par e-mail.',track1:'Sorti par CREZI.',track2:'AyFlori · production par CREZI.',switchLight:'Passer au thème clair',switchDark:'Passer au thème sombre',openMenu:'Ouvrir le menu',closeMenu:'Fermer le menu'},
-  sq:{home:'Kreu',discography:'Diskografia',about:'Rreth CREZI',contact:'Kontakt',mainNavigation:'Navigimi kryesor',tagline:'Producent dhe artist i pavarur shqiptar.',ticker:'PRODUCENT DHE ARTIST I PAVARUR SHQIPTAR I MUZIKËS',chooseLanguage:'Zgjidh gjuhën',portraitColour:'Shfaq fotografinë me ngjyra',portraitMono:'Shfaq fotografinë bardhë e zi',photoGallery:'Galeria e fotografive të CREZI',previousPhoto:'Fotografia e mëparshme',nextPhoto:'Fotografia tjetër',socialMedia:'Rrjetet sociale',instagram:'Instagram',tiktok:'TikTok',youtube:'YouTube',spotify:'Spotify',name:'Emri',email:'Email',topic:'Tema',question:'Pyetje',beatRequest:'Kërkesë për beat',collaboration:'Bashkëpunim',business:'Kërkesë biznesi',other:'Tjetër',message:'Mesazhi',formNote:'Dërgo mesazhin drejtpërdrejt te CREZI.',send:'Dërgo',backTop:'Kthehu lart ↑',listen:'Dëgjo në Spotify',hide:'Fshihe luajtësin',own:'Publikim personal',production:'Krediti i produksionit',sending:'Duke dërguar…',sent:'Mesazhi u dërgua.',sendError:'Dërgimi nuk u krye. Na shkruaj me email.',track1:'Publikuar nga CREZI.',track2:'AyFlori · produksioni nga CREZI.',switchLight:'Kalo te tema e çelët',switchDark:'Kalo te tema e errët',openMenu:'Hap menynë',closeMenu:'Mbyll menynë'},
-  de:{home:'Start',discography:'Diskografie',about:'Über CREZI',contact:'Kontakt',mainNavigation:'Hauptnavigation',tagline:'Unabhängiger albanischer Produzent und Künstler.',ticker:'UNABHÄNGIGER ALBANISCHER MUSIKPRODUZENT UND KÜNSTLER',chooseLanguage:'Sprache wählen',portraitColour:'Porträt in Farbe anzeigen',portraitMono:'Porträt in Schwarz-Weiß anzeigen',photoGallery:'CREZI-Fotogalerie',previousPhoto:'Vorheriges Foto',nextPhoto:'Nächstes Foto',socialMedia:'Soziale Medien',instagram:'Instagram',tiktok:'TikTok',youtube:'YouTube',spotify:'Spotify',name:'Name',email:'E-Mail',topic:'Thema',question:'Frage',beatRequest:'Beat-Anfrage',collaboration:'Zusammenarbeit',business:'Geschäftliche Anfrage',other:'Sonstiges',message:'Nachricht',formNote:'Sende deine Nachricht direkt an CREZI.',send:'Senden',backTop:'Nach oben ↑',listen:'Auf Spotify anhören',hide:'Player schließen',own:'Eigene Veröffentlichung',production:'Produktions-Credit',sending:'Wird gesendet…',sent:'Nachricht gesendet.',sendError:'Senden derzeit nicht möglich. Bitte direkt mailen.',track1:'Veröffentlicht von CREZI.',track2:'AyFlori · Produktion von CREZI.',switchLight:'Zum hellen Design wechseln',switchDark:'Zum dunklen Design wechseln',openMenu:'Menü öffnen',closeMenu:'Menü schließen'}
+  en:{home:'Home',discography:'Discography',about:'About',contact:'Contact',mainNavigation:'Main navigation',tagline:'Independent Albanian producer and artist.',ticker:'INDEPENDENT ALBANIAN MUSIC PRODUCER AND ARTIST',chooseLanguage:'Choose language'},
+  nl:{home:'Home',discography:'Discografie',about:'Over CREZI',contact:'Contact',mainNavigation:'Hoofdnavigatie',tagline:'Onafhankelijke Albanese producer en artiest.',ticker:'ONAFHANKELIJKE ALBANESE MUZIEKPRODUCENT EN ARTIST',chooseLanguage:'Kies taal'},
+  fr:{home:'Accueil',discography:'Discographie',about:'À propos',contact:'Contact',mainNavigation:'Navigation principale',tagline:'Producteur et artiste albanais indépendant.',ticker:'PRODUCTEUR ET ARTISTE ALBANAIS INDÉPENDANT',chooseLanguage:'Choisir la langue'},
+  sq:{home:'Kreu',discography:'Diskografia',about:'Rreth CREZI',contact:'Kontakt',mainNavigation:'Navigimi kryesor',tagline:'Producent dhe artist i pavarur shqiptar.',ticker:'PRODUCENT DHE ARTIST I PAVARUR SHQIPTAR',chooseLanguage:'Zgjidh gjuhën'},
+  de:{home:'Start',discography:'Diskografie',about:'Über CREZI',contact:'Kontakt',mainNavigation:'Hauptnavigation',tagline:'Unabhängiger albanischer Produzent und Künstler.',ticker:'UNABHÄNGIGER ALBANISCHER MUSIKPRODUZENT UND KÜNSTLER',chooseLanguage:'Sprache wählen'}
 };
+
+const languageMeta = [
+  { value: 'en', label: '🇬🇧' },
+  { value: 'nl', label: '🇳🇱' },
+  { value: 'fr', label: '🇫🇷' },
+  { value: 'sq', label: '🇦🇱' },
+  { value: 'de', label: '🇩🇪' }
+];
+
+function ensureLanguageOptions() {
+  const picker = $('#languageSelect');
+  if (!picker) return;
+  picker.innerHTML = languageMeta.map((item) => `<option value="${item.value}">${item.label}</option>`).join('');
+  picker.value = language;
+}
+
+function ensureTicker() {
+  const track = document.querySelector('.marquee-track');
+  if (!track) return;
+  const texts = Array.from(track.querySelectorAll('span')).map((item) => item.textContent.trim()).filter(Boolean);
+  const token = texts[0] || translations[language]?.ticker || 'INDEPENDENT ALBANIAN MUSIC PRODUCER AND ARTIST';
+  if (track.querySelectorAll('span').length < 2) {
+    const duplicate = document.createElement('span');
+    duplicate.textContent = token;
+    duplicate.setAttribute('aria-hidden', 'true');
+    track.appendChild(duplicate);
+  }
+}
 
 let language = 'en';
 const metadataCache = new Map();
-const escapeHTML = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+const escapeHTML = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[char]));
 function safeGet(key, fallback) { try { return localStorage.getItem(key) || fallback; } catch { return fallback; } }
 function safeSet(key, value) { try { localStorage.setItem(key, value); } catch {} }
 
@@ -49,10 +77,14 @@ function applyLanguage(next) {
     if (value) node.setAttribute('aria-label', value);
   });
   const picker = $('#languageSelect');
-  if (picker) { picker.value = language; picker.setAttribute('aria-label', words.chooseLanguage); }
+  if (picker) {
+    picker.value = language;
+    picker.setAttribute('aria-label', words.chooseLanguage);
+  }
   const story = $('[data-about-story]');
   if (story) story.textContent = content.aboutStoryTranslations?.[language] || words.tagline;
   safeSet('crezi-language', language);
+  ensureTicker();
   renderMusic();
   updateTheme();
 }
@@ -82,7 +114,7 @@ function renderMusic() {
     const info = document.createElement('div'); info.className = 'music-card-info';
     const role = track.role === 'Production credit' ? words.production : words.own;
     const desc = track.descriptionKey ? words[track.descriptionKey] : (track.description || '');
-    info.innerHTML = `<div class="music-copy"><p class="eyebrow">${escapeHTML(role)}</p><h3>${escapeHTML(track.title || '')}</h3><p class="track-artist">${escapeHTML(track.artist || '')}</p><p class="track-description">${escapeHTML(desc)}</p></div><div class="music-links">${track.spotify ? `<a href="${escapeHTML(track.spotify)}" target="_blank" rel="noopener noreferrer">Spotify ↗</a>` : ''}${track.youtube ? `<a href="${escapeHTML(track.youtube)}" target="_blank" rel="noopener noreferrer">YouTube ↗</a>` : ''}</div>`;
+    info.innerHTML = `<div class="music-copy"><p class="eyebrow">${escapeHTML(role)}</p><h3>${escapeHTML(track.title || '')}</h3><p class="track-artist">${escapeHTML(track.artist || '')}</p><p class="track-description">${escapeHTML(desc || 'Released by CREZI.')}</p></div>`;
     card.append(cover, info);
     if (track.spotify) {
       const button = document.createElement('button'); button.type = 'button'; button.className = 'embed-toggle'; button.setAttribute('aria-expanded', 'false');
@@ -126,20 +158,26 @@ function renderPhotoCarousel() {
 
 const themeToggle = $('#themeToggle'), themeIcon = $('#themeIcon');
 document.documentElement.dataset.theme = safeGet('crezi-theme', 'dark');
-function updateTheme() { const dark = document.documentElement.dataset.theme === 'dark'; if (themeIcon) themeIcon.textContent = dark ? '☼' : '☾'; if (themeToggle) themeToggle.setAttribute('aria-label', translations[language][dark ? 'switchLight' : 'switchDark']); }
+function updateTheme() { const dark = document.documentElement.dataset.theme === 'dark'; if (themeIcon) themeIcon.textContent = dark ? '☼' : '☾'; if (themeToggle) themeToggle.setAttribute('aria-pressed', String(!dark)); }
 themeToggle?.addEventListener('click', () => { document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'; safeSet('crezi-theme', document.documentElement.dataset.theme); updateTheme(); });
 $('#languageSelect')?.addEventListener('change', (event) => applyLanguage(event.target.value));
 const menu = $('#mobileMenu'), menuButton = $('#menuToggle');
-menuButton?.addEventListener('click', () => { menu.hidden = !menu.hidden; menuButton.setAttribute('aria-expanded', String(!menu.hidden)); menuButton.querySelector('span').textContent = menu.hidden ? '☰' : '×'; menuButton.setAttribute('aria-label', translations[language][menu.hidden ? 'openMenu' : 'closeMenu']); });
-menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => { menu.hidden = true; if (menuButton) { menuButton.setAttribute('aria-expanded','false'); menuButton.querySelector('span').textContent='☰'; menuButton.setAttribute('aria-label',translations[language].openMenu); } }));
-$('.image-colour-toggle')?.addEventListener('click', (event) => { const button = event.currentTarget; const colour = button.classList.toggle('is-colour'); button.setAttribute('aria-pressed', String(colour)); button.setAttribute('aria-label', translations[language][colour ? 'portraitMono' : 'portraitColour']); });
+menuButton?.addEventListener('click', () => { menu.hidden = !menu.hidden; menuButton.setAttribute('aria-expanded', String(!menu.hidden)); menuButton.querySelector('span').textContent = menu.hidden ? 'Menu' : 'Close'; });
+menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => { menu.hidden = true; if (menuButton) { menuButton.setAttribute('aria-expanded','false'); menuButton.querySelector('span').textContent = 'Menu'; } }));
+$('.image-colour-toggle')?.addEventListener('click', (event) => { const button = event.currentTarget; const colour = button.classList.toggle('is-colour'); button.setAttribute('aria-pressed', String(colour)); });
 $('#year')?.replaceChildren(document.createTextNode(String(new Date().getFullYear())));
 $('#contactForm')?.addEventListener('submit', async (event) => {
   event.preventDefault(); const form = event.currentTarget, button = $('#submitButton'), status = $('#formStatus'), words = translations[language];
   if (!button || !status) return; button.disabled = true; status.textContent = words.sending;
-  try { const response = await fetch(content.formProvider || 'https://formsubmit.co/ajax/itsscrezi@gmail.com', { method:'POST', body:new FormData(form), headers:{ Accept:'application/json' } }); if (!response.ok) throw new Error('Form service error'); form.reset(); status.textContent = words.sent; }
-  catch { status.textContent = words.sendError; }
+  try { const response = await fetch(content.formProvider || 'https://formsubmit.co/ajax/itsscrezi@gmail.com', { method:'POST', body:new FormData(form), headers:{ Accept:'application/json' } });
+    if (!response.ok) throw new Error('Failed');
+    status.textContent = words.sent;
+    form.reset();
+  } catch { status.textContent = words.sendError; }
   finally { button.disabled = false; }
 });
+
+ensureLanguageOptions();
 applyLanguage(safeGet('crezi-language', 'en'));
 renderPhotoCarousel();
+ensureTicker();
