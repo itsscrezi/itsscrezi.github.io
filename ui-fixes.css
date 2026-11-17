@@ -176,3 +176,102 @@
   .language-wrap select { max-width: 102px; }
   .wordmark { font-size: 1.35rem; }
 }
+
+/* ==========================================================
+   Icons: identical on every device (SVG instead of text symbols)
+   ========================================================== */
+.icon-button svg,
+.carousel-controls button svg,
+.footer-inner a svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.footer-inner a { display: inline-flex; align-items: center; gap: 8px; }
+.footer-inner a svg { width: 14px; height: 14px; stroke-width: 2; }
+.icon-moon { display: none; }
+:root[data-theme="light"] .icon-sun { display: none; }
+:root[data-theme="light"] .icon-moon { display: block; }
+
+/* ==========================================================
+   Hamburger: three lines that turn into an X (no text)
+   ========================================================== */
+.burger,
+.burger::before,
+.burger::after {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: top .2s ease, transform .2s ease, background .2s ease;
+}
+.burger { position: relative; }
+.burger::before,
+.burger::after { content: ""; position: absolute; left: 0; }
+.burger::before { top: -6px; }
+.burger::after { top: 6px; }
+.menu-toggle[aria-expanded="true"] .burger { background: transparent; }
+.menu-toggle[aria-expanded="true"] .burger::before { top: 0; transform: rotate(45deg); }
+.menu-toggle[aria-expanded="true"] .burger::after { top: 0; transform: rotate(-45deg); }
+
+/* ==========================================================
+   Mobile menu: fixed panel under the header, follows the scroll
+   ========================================================== */
+:root { --header-h: 82px; }
+@media (max-width: 620px) { :root { --header-h: 68px; } }
+@media (max-width: 900px) {
+  .mobile-menu:not([hidden]) {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    z-index: 49;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 6px 24px 14px;
+    max-height: calc(100vh - var(--header-h));
+    max-height: calc(100dvh - var(--header-h));
+    overflow-y: auto;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 24px 40px rgba(0,0,0,.3);
+  }
+  .mobile-menu a {
+    padding: 16px 0;
+    text-align: left;
+    font-size: .8rem;
+    color: var(--text);
+    border-bottom: 1px solid var(--line);
+  }
+  .mobile-menu a:last-child { border-bottom: 0; }
+}
+
+/* ==========================================================
+   Ticker: always slides, with a dot separator
+   ========================================================== */
+.marquee-track {
+  animation-name: ticker !important;
+  animation-duration: var(--ticker-duration, 40s) !important;
+  animation-timing-function: linear !important;
+  animation-iteration-count: infinite !important;
+  will-change: transform;
+}
+.marquee-track span {
+  display: inline-flex;
+  align-items: center;
+  gap: 44px;
+}
+.marquee-track span::after {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
