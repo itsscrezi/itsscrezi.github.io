@@ -1,2 +1,47 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b0b0b"><title>404 — CREZI</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="site-refresh.css"><link rel="stylesheet" href="ui-fixes.css"><style>.error-page{min-height:100svh;display:grid;grid-template-rows:auto 1fr auto}.error-main{width:min(900px,calc(100% - 40px));margin:auto;padding:80px 0}.error-main strong{display:block;color:var(--accent);font:700 clamp(6rem,24vw,16rem)/.78 "Space Grotesk",Arial,sans-serif;letter-spacing:-.12em}.error-main h1{margin:28px 0 0;font:700 clamp(2rem,6vw,4rem)/1 "Space Grotesk",Arial,sans-serif;letter-spacing:-.08em;text-transform:uppercase}.error-main p{max-width:480px;color:var(--muted)}</style></head><body class="error-page"><header class="site-header"><a class="wordmark" href="./">CREZI<span>.</span></a><span>404</span></header><main class="error-main"><strong>404</strong><h1>Page not found.</h1><p>This page isn’t here. Check the address or go back to the homepage.</p><a class="button" href="./">Back to home <span aria-hidden="true">↗</span></a></main><footer class="site-footer"><div class="section-shell footer-inner"><span>© CREZI</span><a href="mailto:itsscrezi@gmail.com">itsscrezi@gmail.com</a></div></footer></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b0b0b">
+  <meta name="robots" content="noindex">
+  <title>404 — CREZI</title>
+  <script>try{var th=localStorage.getItem('crezi-theme');if(th)document.documentElement.dataset.theme=th;}catch(e){}</script>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/site-refresh.css">
+  <link rel="stylesheet" href="/ui-fixes.css">
+  <style>
+    .error-page{min-height:100svh;display:grid;grid-template-rows:auto 1fr auto}
+    .error-main{width:min(900px,calc(100% - 40px));margin:auto;padding:80px 0}
+    .error-main strong{display:block;color:var(--accent);font:700 clamp(6rem,24vw,16rem)/.78 "Space Grotesk",Arial,sans-serif;letter-spacing:-.12em}
+    .error-main h1{margin:28px 0 0;font:700 clamp(2rem,6vw,4rem)/1 "Space Grotesk",Arial,sans-serif;letter-spacing:-.08em;text-transform:uppercase}
+    .error-main p{max-width:480px;color:var(--muted)}
+    .error-main .button svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .page-tag{justify-self:end;color:var(--muted);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
+  </style>
+</head>
+<body class="error-page">
+  <header class="site-header"><a class="wordmark" href="/">CREZI<span>.</span></a><span></span><span class="page-tag">404</span></header>
+  <main class="error-main">
+    <strong>404</strong>
+    <h1 data-t="title">Page not found.</h1>
+    <p data-t="text">This page isn’t here. Check the address or go back to the homepage.</p>
+    <a class="button" href="/"><span data-t="button">Back to home</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+  </main>
+  <footer class="site-footer"><div class="section-shell footer-inner"><span>© CREZI</span><a href="mailto:itsscrezi@gmail.com">itsscrezi@gmail.com</a></div></footer>
+  <script>
+    var L = {
+      en:{title:'Page not found.',text:'This page isn’t here. Check the address or go back to the homepage.',button:'Back to home'},
+      nl:{title:'Pagina niet gevonden.',text:'Deze pagina bestaat niet. Controleer het adres of ga terug naar de homepage.',button:'Terug naar home'},
+      fr:{title:'Page introuvable.',text:'Cette page n’existe pas. Vérifiez l’adresse ou retournez à l’accueil.',button:'Retour à l’accueil'},
+      sq:{title:'Faqja nuk u gjet.',text:'Kjo faqe nuk ekziston. Kontrollo adresën ose kthehu te kreu.',button:'Kthehu te kreu'},
+      de:{title:'Seite nicht gefunden.',text:'Diese Seite gibt es nicht. Prüfe die Adresse oder gehe zurück zur Startseite.',button:'Zurück zur Startseite'}
+    };
+    var lang = 'en';
+    try { lang = localStorage.getItem('crezi-language') || 'en'; } catch (e) {}
+    if (!L[lang]) lang = 'en';
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-t]').forEach(function (n) { n.textContent = L[lang][n.getAttribute('data-t')]; });
+  </script>
+</body>
+</html>
