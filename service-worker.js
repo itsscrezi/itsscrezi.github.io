@@ -1,4 +1,4 @@
-const CACHE_NAME = 'crezi-site-v12';
+const CACHE_NAME = 'crezi-site-v13';
 const CORE_FILES = [
   './',
   './index.html',
@@ -46,9 +46,11 @@ async function networkFirst(event) {
     }
     return response; // includes GitHub's own 404 page for missing URLs
   } catch (error) {
-    const cached = await caches.match(request, { ignoreSearch: request.mode === 'navigate' });
-    if (cached) return cached;
+    // Offline: any page visit shows the "No connection" page.
     if (request.mode === 'navigate') return offlineFallback();
+    // Files the offline page itself needs (CSS etc.) still come from the cache.
+    const cached = await caches.match(request);
+    if (cached) return cached;
     return Response.error();
   }
 }
