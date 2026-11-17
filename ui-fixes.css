@@ -395,3 +395,71 @@
   .language-visual-toggle { min-height: 38px; padding: 0 8px; gap: 6px; }
   .language-visual-toggle .lang-name { display: none; }
 }
+
+/* ==========================================================
+   Music: smaller cards when there are many songs, plus pages
+   ========================================================== */
+#musicGrid[data-density="compact"] {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(14px, 2vw, 26px) !important;
+}
+@media (max-width: 960px) {
+  #musicGrid[data-density="compact"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+@media (max-width: 620px) {
+  #musicGrid[data-density="compact"] { grid-template-columns: minmax(0, 1fr) !important; }
+}
+#musicGrid[data-density="compact"] > .music-card { padding: clamp(10px, 1.4vw, 16px) !important; }
+#musicGrid[data-density="compact"] .music-cover { margin-bottom: 14px !important; }
+#musicGrid[data-density="compact"] .cover-title {
+  font-size: clamp(1.2rem, 2.2vw, 1.9rem) !important;
+  padding: 14px !important;
+}
+#musicGrid[data-density="compact"] .music-copy h3 { font-size: clamp(1.05rem, 1.5vw, 1.4rem); }
+#musicGrid[data-density="compact"] .music-copy p { font-size: .84rem; line-height: 1.5 !important; }
+#musicGrid[data-density="compact"] .embed-toggle { min-height: 40px !important; padding: 9px 12px !important; font-size: .66rem; }
+
+.music-pager {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 38px;
+}
+.pager-button {
+  display: inline-grid;
+  place-items: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--text);
+  font-size: .8rem;
+  cursor: pointer;
+  transition: border-color .2s ease, color .2s ease, background .2s ease, transform .2s ease;
+}
+.pager-button:hover:not(:disabled),
+.pager-button:focus-visible:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+.pager-button[aria-current="page"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  cursor: default;
+}
+.pager-button:disabled { opacity: .35; cursor: not-allowed; }
+.pager-button svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.pager-gap { color: var(--muted); padding: 0 4px; }
