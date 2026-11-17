@@ -16,6 +16,8 @@ const languageMeta = [
   { value: 'de', label: '🇩🇪' }
 ];
 
+let language = 'en';
+
 function ensureLanguageOptions() {
   const picker = $('#languageSelect');
   if (!picker) return;
@@ -23,20 +25,28 @@ function ensureLanguageOptions() {
   picker.value = language;
 }
 
+/* Ticker: builds enough copies to fill any screen, always in two identical halves
+   so the -50% animation loops seamlessly. */
+let tickerWidth = 0;
+let tickerTimer;
 function ensureTicker() {
   const track = document.querySelector('.marquee-track');
   if (!track) return;
-  const texts = Array.from(track.querySelectorAll('span')).map((item) => item.textContent.trim()).filter(Boolean);
-  const token = texts[0] || translations[language]?.ticker || 'INDEPENDENT ALBANIAN MUSIC PRODUCER AND ARTIST';
-  if (track.querySelectorAll('span').length < 2) {
-    const duplicate = document.createElement('span');
-    duplicate.textContent = token;
-    duplicate.setAttribute('aria-hidden', 'true');
-    track.appendChild(duplicate);
-  }
+  const text = translations[language]?.ticker || 'INDEPENDENT ALBANIAN MUSIC PRODUCER AND ARTIST';
+  const make = () => { const s = document.createElement('span'); s.textContent = text; return s; };
+  track.replaceChildren(make());
+  const one = track.firstElementChild.getBoundingClientRect().width || 600;
+  const half = Math.max(2, Math.ceil(window.innerWidth / one) + 1);
+  for (let i = 1; i < half * 2; i++) track.appendChild(make());
+  track.style.setProperty('--ticker-duration', ((one * half) / 70).toFixed(1) + 's');
+  tickerWidth = window.innerWidth;
 }
+addEventListener('resize', () => {
+  clearTimeout(tickerTimer);
+  tickerTimer = setTimeout(() => { if (window.innerWidth !== tickerWidth) ensureTicker(); }, 200);
+});
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => ensureTicker());
 
-let language = 'en';
 const metadataCache = new Map();
 const escapeHTML = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[char]));
 function safeGet(key, fallback) { try { return localStorage.getItem(key) || fallback; } catch { return fallback; } }
@@ -119,8 +129,8 @@ function renderMusic() {
     if (track.spotify) {
       const button = document.createElement('button'); button.type = 'button'; button.className = 'embed-toggle'; button.setAttribute('aria-expanded', 'false');
       const playerShell = document.createElement('div'); playerShell.className = 'spotify-player-shell'; playerShell.hidden = true;
-      const syncButton = () => { const opened = !playerShell.hidden; button.textContent = opened ? `− ${translations[language].hide}` : `▶ ${translations[language].listen}`; button.setAttribute('aria-expanded', String(opened)); };
-      button.textContent = `▶ ${words.listen}`;
+      const syncButton = () => { const opened = !playerShell.hidden; button.textContent = opened ? translations[language].hide : translations[language].listen; button.setAttribute('aria-expanded', String(opened)); };
+      button.textContent = words.listen;
       button.addEventListener('click', () => {
         if (!playerShell.hidden) { playerShell.hidden = true; playerShell.replaceChildren(); syncButton(); return; }
         const id = track.spotify.match(/track\/([a-zA-Z0-9]+)/)?.[1];
@@ -156,14 +166,33 @@ function renderPhotoCarousel() {
   if (next) { next.disabled = items.length < 2; next.addEventListener('click', () => update(1)); }
 }
 
-const themeToggle = $('#themeToggle'), themeIcon = $('#themeIcon');
+/* Theme (icons are SVG in index.html; CSS shows the right one) */
+const themeToggle = $('#themeToggle');
 document.documentElement.dataset.theme = safeGet('crezi-theme', 'dark');
-function updateTheme() { const dark = document.documentElement.dataset.theme === 'dark'; if (themeIcon) themeIcon.textContent = dark ? '☼' : '☾'; if (themeToggle) themeToggle.setAttribute('aria-pressed', String(!dark)); }
-themeToggle?.addEventListener('click', () => { document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'; safeSet('crezi-theme', document.documentElement.dataset.theme); updateTheme(); });
+function updateTheme() {
+  const dark = document.documentElement.dataset.theme === 'dark';
+  if (themeToggle) themeToggle.setAttribute('aria-pressed', String(!dark));
+}
+themeToggle?.addEventListener('click', () => {
+  document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  safeSet('crezi-theme', document.documentElement.dataset.theme);
+  updateTheme();
+});
 $('#languageSelect')?.addEventListener('change', (event) => applyLanguage(event.target.value));
+
+/* Mobile menu: no text labels, the button is drawn with CSS and becomes an X */
 const menu = $('#mobileMenu'), menuButton = $('#menuToggle');
-menuButton?.addEventListener('click', () => { menu.hidden = !menu.hidden; menuButton.setAttribute('aria-expanded', String(!menu.hidden)); menuButton.querySelector('span').textContent = menu.hidden ? 'Menu' : 'Close'; });
-menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => { menu.hidden = true; if (menuButton) { menuButton.setAttribute('aria-expanded','false'); menuButton.querySelector('span').textContent = 'Menu'; } }));
+function setMenu(open) {
+  if (!menu || !menuButton) return;
+  menu.hidden = !open;
+  menuButton.setAttribute('aria-expanded', String(open));
+  menuButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+}
+menuButton?.addEventListener('click', () => setMenu(menu.hidden));
+menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenu(false); });
+addEventListener('resize', () => { if (window.innerWidth > 900) setMenu(false); });
+
 $('.image-colour-toggle')?.addEventListener('click', (event) => { const button = event.currentTarget; const colour = button.classList.toggle('is-colour'); button.setAttribute('aria-pressed', String(colour)); });
 $('#year')?.replaceChildren(document.createTextNode(String(new Date().getFullYear())));
 $('#contactForm')?.addEventListener('submit', async (event) => {
