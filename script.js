@@ -156,11 +156,20 @@ async function attachCover(track, cover, image) {
 }
 
 /* ---------- Music cards ---------- */
+let musicPage = 1;
+const MUSIC_PAGE_SIZE = 6; // cards per page once the list gets long
+
 function renderMusic() {
   const grid = $('#musicGrid');
   if (!grid) return;
   grid.replaceChildren();
-  (content.music || []).forEach((track) => {
+  const all = content.music || [];
+  // 1-2 tracks: big cards. 3 or more: smaller cards in 3 columns.
+  grid.dataset.density = all.length > 2 ? 'compact' : 'large';
+  const pages = Math.max(1, Math.ceil(all.length / MUSIC_PAGE_SIZE));
+  musicPage = Math.min(Math.max(1, musicPage), pages);
+  const visible = pages > 1 ? all.slice((musicPage - 1) * MUSIC_PAGE_SIZE, musicPage * MUSIC_PAGE_SIZE) : all;
+  visible.forEach((track) => {
     const production = track.role === 'Production credit';
     const card = document.createElement('article');
     card.className = 'music-card';
@@ -224,6 +233,57 @@ function renderMusic() {
     }
     grid.appendChild(card);
   });
+  renderMusicPager(pages);
+}
+
+function renderMusicPager(pages) {
+  let pager = $('#musicPager');
+  if (!pager) {
+    pager = document.createElement('nav');
+    pager.id = 'musicPager';
+    pager.className = 'music-pager';
+    $('#musicGrid').insertAdjacentElement('afterend', pager);
+  }
+  pager.replaceChildren();
+  pager.hidden = pages < 2;
+  if (pages < 2) return;
+  pager.setAttribute('aria-label', t('pages'));
+
+  const go = (page) => {
+    musicPage = page;
+    renderMusic();
+    const section = $('#discography');
+    if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  const make = (html, label, page, disabled, current) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'pager-button';
+    b.innerHTML = html;
+    b.setAttribute('aria-label', label);
+    if (disabled) b.disabled = true;
+    if (current) b.setAttribute('aria-current', 'page');
+    else b.addEventListener('click', () => go(page));
+    return b;
+  };
+  pager.appendChild(make('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>', t('previousPage'), musicPage - 1, musicPage === 1));
+
+  // 1 ... current-1 current current+1 ... last
+  const shown = [...new Set([1, pages, musicPage - 1, musicPage, musicPage + 1])].filter((p) => p >= 1 && p <= pages).sort((a, b) => a - b);
+  let last = 0;
+  shown.forEach((p) => {
+    if (p - last > 1) {
+      const gap = document.createElement('span');
+      gap.className = 'pager-gap';
+      gap.setAttribute('aria-hidden', 'true');
+      gap.textContent = '…';
+      pager.appendChild(gap);
+    }
+    pager.appendChild(make(String(p), `${t('page')} ${p}`, p, false, p === musicPage));
+    last = p;
+  });
+
+  pager.appendChild(make('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg>', t('nextPage'), musicPage + 1, musicPage === pages));
 }
 
 /* ---------- Photo carousel ---------- */
