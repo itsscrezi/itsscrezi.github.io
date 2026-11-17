@@ -1,4 +1,4 @@
-const CACHE_NAME = 'crezi-site-v11';
+const CACHE_NAME = 'crezi-site-v12';
 const CORE_FILES = [
   './',
   './index.html',
@@ -38,7 +38,8 @@ async function offlineFallback() {
 async function networkFirst(event) {
   const request = event.request;
   try {
-    const response = await fetch(request);
+    // Non-page files (CSS/JS) are revalidated so a fresh deploy shows up immediately.
+    const response = request.mode === 'navigate' ? await fetch(request) : await fetch(request, { cache: 'no-cache' });
     if (response && response.ok) {
       const copy = response.clone();
       event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.put(request, copy)).catch(() => {}));
