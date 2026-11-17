@@ -918,3 +918,17 @@ button, input, select, textarea {
 .preview-block span:nth-child(18) { height: 70%; }
 .preview-block span:nth-child(19) { height: 42%; }
 .preview-block span:nth-child(20) { height: 58%; }
+
+@media (max-width: 760px) {
+  .mobile-menu {
+    position: fixed;
+    top: 78px;
+    left: 0;
+    right: 0;
+    z-index: 49;
+    max-height: calc(100vh - 78px);
+    max-height: calc(100dvh - 78px);
+    overflow-y: auto;
+  }
+  .mobile-menu[hidden] { display: none; }
+}
