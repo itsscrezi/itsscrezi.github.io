@@ -88,8 +88,6 @@ function ensureTicker() {
   const half = Math.max(2, Math.ceil(window.innerWidth / one) + 1);
   for (let i = 1; i < half * 2; i++) track.appendChild(make());
   track.style.setProperty('--ticker-duration', ((one * half) / 70).toFixed(1) + 's');
-  const wrap = document.querySelector('.marquee-wrap');
-  if (wrap) wrap.setAttribute('aria-label', text);
   tickerWidth = window.innerWidth;
 }
 addEventListener('resize', () => {
