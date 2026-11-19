@@ -22,11 +22,11 @@ window.CREZI_CONTENT = {
     'assets/photos/live-show.jpg',
     'assets/photos/studio.jpg'
   ],
-  /* Song covers: leave cover '' to fetch it automatically from Spotify / Apple.
-     Or put an image in assets/covers/ and set e.g. cover: 'assets/covers/a-e-din.jpg' (this always wins). */
+  /* Song covers: put an image in assets/photos/ and set cover to its path (this always wins).
+     Leave cover '' to fetch it automatically from Spotify / Apple (slower). */
   music: [
-    {title:'A E DIN',artist:'CREZI',role:'Own release',spotify:'https://open.spotify.com/track/72GipCAxudNTFmI6Xl0CUi',youtube:'https://www.youtube.com/@itsscrezi',cover:''},
-    {title:'PIANO!',artist:'AyFlori',role:'Production credit',spotify:'https://open.spotify.com/track/4PqTVcr15EeWhJThgXP8pj',youtube:'',cover:''}
+    {title:'A E DIN',artist:'CREZI',role:'Own release',spotify:'https://open.spotify.com/track/72GipCAxudNTFmI6Xl0CUi',youtube:'https://www.youtube.com/@itsscrezi',cover:'assets/photos/cover-a-e-din.webp'},
+    {title:'PIANO!',artist:'AyFlori',role:'Production credit',spotify:'https://open.spotify.com/track/4PqTVcr15EeWhJThgXP8pj',youtube:'',cover:'assets/photos/cover-piano.webp'}
   ],
   socials: {
     instagram:'https://www.instagram.com/itsscrezi/',
