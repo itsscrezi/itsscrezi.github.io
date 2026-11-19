@@ -139,7 +139,7 @@ async function findRemoteCovers(track) {
   return found;
 }
 
-// Try each source in order; the first one that loads is shown. Starts loading immediately (no extra test download).
+// Try each source in order; the first one that loads is shown.
 function loadCover(image, cover, sources, onShown, onExhausted) {
   const queue = sources.filter(Boolean);
   const next = () => {
@@ -154,13 +154,26 @@ function loadCover(image, cover, sources, onShown, onExhausted) {
 
 function attachCover(track, cover, image) {
   const id = spotifyId(track);
-  const known = [track.cover, id && safeGet(`crezi-cover-${id}`, '')].filter(Boolean);
   const lookup = async () => {
     const remote = await findRemoteCovers(track);
     if (!cover.isConnected) return;
     loadCover(image, cover, remote, (src) => { if (id) safeSet(`crezi-cover-${id}`, src); });
   };
-  // A local file (cover in content.js) or a remembered address loads right away; otherwise ask Spotify / Apple.
+  // Local cover file: lazy loaded, no network chain. Spotify is only a fallback if the file is missing.
+  if (track.cover) {
+    image.loading = 'lazy';
+    image.hidden = false;
+    cover.classList.add('has-cover');
+    image.onerror = () => {
+      image.hidden = true;
+      cover.classList.remove('has-cover');
+      image.removeAttribute('loading');
+      lookup();
+    };
+    image.src = track.cover;
+    return;
+  }
+  const known = [id && safeGet(`crezi-cover-${id}`, '')].filter(Boolean);
   if (known.length) loadCover(image, cover, known, null, lookup);
   else lookup();
 }
