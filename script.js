@@ -139,28 +139,30 @@ async function findRemoteCovers(track) {
   return found;
 }
 
-function probeImage(src) {
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.referrerPolicy = 'no-referrer';
-    img.onload = () => resolve(true);
-    img.onerror = () => resolve(false);
-    img.src = src;
-  });
+// Try each source in order; the first one that loads is shown. Starts loading immediately (no extra test download).
+function loadCover(image, cover, sources, onShown, onExhausted) {
+  const queue = sources.filter(Boolean);
+  const next = () => {
+    const src = queue.shift();
+    if (!src) { if (onExhausted) onExhausted(); return; }
+    image.onload = () => { image.hidden = false; cover.classList.add('has-cover'); if (onShown) onShown(src); };
+    image.onerror = next;
+    image.src = src;
+  };
+  next();
 }
 
-const whenIdle = () => new Promise((resolve) => (window.requestIdleCallback ? requestIdleCallback(resolve, { timeout: 2000 }) : setTimeout(resolve, 400)));
-
-async function attachCover(track, cover, image) {
+function attachCover(track, cover, image) {
   const id = spotifyId(track);
-  const show = (src) => { if (!cover.isConnected) return; image.src = src; image.hidden = false; cover.classList.add('has-cover'); };
-  const local = [track.cover, id && safeGet(`crezi-cover-${id}`, '')].filter(Boolean);
-  for (const src of local) if (await probeImage(src)) return show(src);
-  await whenIdle();
-  const remote = await findRemoteCovers(track);
-  for (const src of remote) {
-    if (await probeImage(src)) { if (id) safeSet(`crezi-cover-${id}`, src); return show(src); }
-  }
+  const known = [track.cover, id && safeGet(`crezi-cover-${id}`, '')].filter(Boolean);
+  const lookup = async () => {
+    const remote = await findRemoteCovers(track);
+    if (!cover.isConnected) return;
+    loadCover(image, cover, remote, (src) => { if (id) safeSet(`crezi-cover-${id}`, src); });
+  };
+  // A local file (cover in content.js) or a remembered address loads right away; otherwise ask Spotify / Apple.
+  if (known.length) loadCover(image, cover, known, null, lookup);
+  else lookup();
 }
 
 /* ---------- Music cards ---------- */
