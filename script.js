@@ -178,6 +178,8 @@ function renderMusic() {
     image.alt = `${track.title || 'Track'} cover`;
     image.decoding = 'async';
     image.referrerPolicy = 'no-referrer';
+    image.width = 640;
+    image.height = 640;
     image.hidden = true;
     const fallback = document.createElement('span');
     fallback.className = 'cover-title';
@@ -196,6 +198,7 @@ function renderMusic() {
       if (!href) return;
       const a = document.createElement('a');
       a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      a.setAttribute('aria-label', `${label}: ${track.title || 'CREZI'}`);
       a.innerHTML = `${label}${ICON_ARROW}`;
       links.appendChild(a);
     });
@@ -296,6 +299,9 @@ function renderPhotoCarousel() {
   image.alt = 'CREZI';
   image.className = 'carousel-photo';
   image.loading = 'lazy';
+  image.width = 1200;
+  image.height = 800;
+  image.addEventListener('load', () => { if (image.naturalWidth) { image.width = image.naturalWidth; image.height = image.naturalHeight; } });
   viewport.replaceChildren(image);
   const count = $('#photoCount'), previous = $('#photoPrevious'), next = $('#photoNext');
   const pad = (n) => String(n).padStart(2, '0');
