@@ -78,17 +78,23 @@ function installLanguagePicker() {
 /* ---------- Ticker: enough copies for any screen, two identical halves = seamless loop ---------- */
 let tickerWidth = 0;
 let tickerTimer;
+let tickerToken = 0;
 function ensureTicker() {
   const track = document.querySelector('.marquee-track');
   if (!track) return;
   const text = t('ticker') || 'INDEPENDENT ALBANIAN MUSIC PRODUCER AND ARTIST';
   const make = () => { const s = document.createElement('span'); s.textContent = text; return s; };
   track.replaceChildren(make());
-  const one = track.firstElementChild.getBoundingClientRect().width || 600;
-  const half = Math.max(2, Math.ceil(window.innerWidth / one) + 1);
-  for (let i = 1; i < half * 2; i++) track.appendChild(make());
-  track.style.setProperty('--ticker-duration', ((one * half) / 70).toFixed(1) + 's');
-  tickerWidth = window.innerWidth;
+  const token = ++tickerToken;
+  // Wait two frames so the width is read from a finished layout (reading it straight away forces a reflow).
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    if (token !== tickerToken || !track.firstElementChild) return;
+    const one = track.firstElementChild.getBoundingClientRect().width || 600;
+    const half = Math.max(2, Math.ceil(window.innerWidth / one) + 1);
+    for (let i = 1; i < half * 2; i++) track.appendChild(make());
+    track.style.setProperty('--ticker-duration', ((one * half) / 70).toFixed(1) + 's');
+    tickerWidth = window.innerWidth;
+  }));
 }
 addEventListener('resize', () => {
   clearTimeout(tickerTimer);
@@ -119,6 +125,7 @@ async function findRemoteCovers(track) {
       found.push(data.thumbnail_url);
     }
   }
+  if (found.length) return found; // Spotify worked, no need to ask Apple
   const search = new URL('https://itunes.apple.com/search');
   search.searchParams.set('term', `${track.title || ''} ${track.artist || ''}`.trim());
   search.searchParams.set('entity', 'song');
@@ -142,11 +149,14 @@ function probeImage(src) {
   });
 }
 
+const whenIdle = () => new Promise((resolve) => (window.requestIdleCallback ? requestIdleCallback(resolve, { timeout: 2000 }) : setTimeout(resolve, 400)));
+
 async function attachCover(track, cover, image) {
   const id = spotifyId(track);
   const show = (src) => { if (!cover.isConnected) return; image.src = src; image.hidden = false; cover.classList.add('has-cover'); };
   const local = [track.cover, id && safeGet(`crezi-cover-${id}`, '')].filter(Boolean);
   for (const src of local) if (await probeImage(src)) return show(src);
+  await whenIdle();
   const remote = await findRemoteCovers(track);
   for (const src of remote) {
     if (await probeImage(src)) { if (id) safeSet(`crezi-cover-${id}`, src); return show(src); }
