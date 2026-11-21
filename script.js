@@ -22,7 +22,7 @@ const flagSvg = {
   en: '<svg class="flag" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#18316b"/><path d="M0 0l24 16M24 0L0 16" stroke="#fff" stroke-width="4"/><path d="M0 0l24 16M24 0L0 16" stroke="#c8102e" stroke-width="1.7"/><path d="M12 0v16M0 8h24" stroke="#fff" stroke-width="6"/><path d="M12 0v16M0 8h24" stroke="#c8102e" stroke-width="2.6"/></svg>',
   nl: '<svg class="flag" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="5.34" fill="#ae1c28"/><rect y="5.33" width="24" height="5.34" fill="#fff"/><rect y="10.66" width="24" height="5.34" fill="#21468b"/></svg>',
   fr: '<svg class="flag" viewBox="0 0 24 16" aria-hidden="true"><rect width="8" height="16" fill="#002395"/><rect x="8" width="8" height="16" fill="#fff"/><rect x="16" width="8" height="16" fill="#ed2939"/></svg>',
-  sq: '<svg class="flag" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#E41E20"/><path fill="#000" d="M12 2.1C10.8 2.8 9.5 2.5 8.2 2.9L5.4 1.8 6.1 4.3 3.5 3.5 4.8 6.1 2.2 6.5 5.2 7.5 3.5 9.1 7 8.8 5.6 11.1 9 9.7 10.1 13.8 11.3 10.2 12 8.8 12.7 10.2 13.9 13.8 15 9.7 18.4 11.1 17 8.8 20.5 9.1 18.8 7.5 21.8 6.5 19.2 6.1 20.5 3.5 17.9 4.3 18.6 1.8 15.8 2.9 14.5 2.5 12 2.1Z"/></svg>',
+  sq: '<svg class="flag" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#E41E20"/><image href="https://upload.wikimedia.org/wikipedia/commons/3/36/Flag_of_Albania.svg" width="24" height="16"/></svg>',
   de: '<svg class="flag" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="5.34" fill="#111"/><rect y="5.33" width="24" height="5.34" fill="#d00"/><rect y="10.66" width="24" height="5.34" fill="#ffce00"/></svg>'
 };
 let refreshPicker = () => {};
