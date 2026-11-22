@@ -141,8 +141,8 @@ button,input,select,textarea{font:inherit}
 .button:hover::before,.button:focus-visible::before{transform:translateX(120%)}
 .button:hover,.button:focus-visible{transform:translateY(-2px);border-color:var(--accent);background:var(--accent);color:#fff;box-shadow:0 18px 34px rgba(223,42,42,.24)}
 .hero-portrait{position:relative;width:min(100%,480px);justify-self:end;padding:0;border:0;background:transparent;cursor:pointer;animation:float 6s ease-in-out infinite}
-/* NO CROP: the whole portrait is always shown, height follows the real image ratio */
-.hero-portrait img{width:100%;height:auto;aspect-ratio:auto;object-fit:contain;filter:grayscale(100%) contrast(1.06) brightness(.96);transition:filter 380ms ease,transform 380ms ease,box-shadow .2s ease;box-shadow:var(--shadow)}
+/* NO CROP: the whole portrait is always shown; its space is reserved from the start (247x319) so nothing jumps */
+.hero-portrait img{width:100%;height:auto;aspect-ratio:247/319;object-fit:contain;filter:grayscale(100%) contrast(1.06) brightness(.96);transition:filter 380ms ease,transform 380ms ease,box-shadow .2s ease;box-shadow:var(--shadow)}
 .hero-portrait:hover img,.hero-portrait:focus-visible img,.hero-portrait.is-colour img{filter:grayscale(0%) contrast(1) brightness(1);transform:translateY(-2px) scale(1.01)}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .marquee-wrap{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(223,42,42,.04),rgba(255,255,255,.02),rgba(223,42,42,.04))}
